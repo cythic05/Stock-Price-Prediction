@@ -6,24 +6,26 @@ AI-powered stock price forecasting using Prophet ML models with interactive visu
 
 - **Real-time Stock Data**: Fetches historical stock data using yfinance API
 - **ML Predictions**: Uses Facebook Prophet for accurate price forecasting
-- **Interactive Charts**: Beautiful Plotly visualizations with confidence intervals
+- **Interactive Charts**: Beautiful Recharts visualizations with confidence intervals
 - **Popular Stocks**: Quick access to major stocks (AAPL, NVDA, GOOGL, etc.)
 - **Customizable**: Choose prediction periods (1-30 days) and historical data ranges
 - **Detailed Forecasts**: Day-by-day predictions with confidence ranges
+- **Historical Analysis**: Shows historical prices alongside predictions
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Python, FastAPI, Prophet ML
-- **Frontend**: Streamlit, Plotly
+- **Backend**: Python, FastAPI, Prophet ML, yfinance
+- **Frontend**: React, Recharts, Axios
 - **Data**: yfinance API for real-time market data
-- **Deployment**: Streamlit Cloud ready
+- **ML Model**: Facebook Prophet for time series forecasting
 
 ## 📋 Installation
 
-1. **Clone the repository**:
+### Backend Setup
+
+1. **Navigate to backend directory**:
    ```bash
-   git clone https://github.com/cythic05/Stock-Price-Prediction.git
-   cd Stock-Price-Prediction
+   cd backend
    ```
 
 2. **Create a virtual environment**:
@@ -37,40 +39,66 @@ AI-powered stock price forecasting using Prophet ML models with interactive visu
    pip install -r requirements.txt
    ```
 
-## 🎯 Usage
-
-1. **Run the Streamlit app**:
+4. **Run the backend server**:
    ```bash
-   streamlit run streamlit_app.py
+   uvicorn main:app --host 0.0.0.0 --port 8000 --reload
    ```
 
-2. **Open your browser**: Navigate to `http://localhost:8501`
+### Frontend Setup
 
-3. **Make predictions**:
+1. **Navigate to frontend directory**:
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the frontend development server**:
+   ```bash
+   npm start
+   ```
+
+## 🎯 Usage
+
+1. **Start the backend**: Run `uvicorn main:app --host 0.0.0.0 --port 8000 --reload` in the backend directory
+2. **Start the frontend**: Run `npm start` in the frontend directory
+3. **Open your browser**: Navigate to `http://localhost:3000`
+4. **Make predictions**:
    - Enter a stock ticker symbol (e.g., AAPL, NVDA, GOOGL)
    - Select prediction days (1-30 days)
-   - Choose historical data period
-   - Click "Generate Prediction"
-
-## 🌐 Deployment
-
-### Streamlit Cloud (Recommended)
-1. Push code to GitHub
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Connect your repository
-4. Deploy with one click
-
-### Other Platforms
-- **Heroku**: Add `Procfile` with `streamlit run streamlit_app.py`
-- **Railway**: Direct deployment from GitHub
-- **AWS/Azure/GCP**: Deploy as web service
+   - Click "Predict" to see the forecast
 
 ## 📊 How It Works
 
-1. **Data Fetching**: Uses yfinance to get historical stock data
+1. **Data Fetching**: Backend uses yfinance to get historical stock data
 2. **ML Processing**: Facebook Prophet analyzes patterns and trends
 3. **Prediction**: Generates forecasts with confidence intervals
-4. **Visualization**: Interactive charts show historical vs predicted prices
+4. **Visualization**: Frontend displays historical vs predicted prices with interactive charts
+
+## 🌐 API Endpoints
+
+- `GET /` - API health check
+- `GET /predict?ticker=AAPL&days=5` - Get stock predictions
+  - Returns historical data and forecast with confidence intervals
+
+## 📂 Project Structure
+
+```
+stock_pred/
+├── backend/
+│   ├── main.py              # FastAPI application with ML logic
+│   └── requirements.txt     # Python dependencies
+└── frontend/
+    ├── src/
+    │   ├── App.jsx          # Main React application
+    │   └── index.js         # Entry point
+    ├── public/
+    │   └── index.html       # HTML template
+    └── package.json         # Node.js dependencies
+```
 
 ## ⚠️ Disclaimer
 
@@ -78,7 +106,7 @@ This project is for educational purposes only. Not financial advice. Always do y
 
 ## 📝 Resume Description
 
-"Developed a full-stack stock price prediction platform using Streamlit, Prophet ML models, and yfinance API with interactive visualizations and confidence intervals for investment decision support."
+"Developed a full-stack stock price prediction platform using FastAPI, React, and Prophet ML models with interactive visualizations and confidence intervals for investment decision support."
 
 ## 🤝 Contributing
 
